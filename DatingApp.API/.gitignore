@@ -2,3 +2,6 @@
 bin
 obj
 *.db
+appsettings.json
+Migrations
+property
