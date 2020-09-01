@@ -19,6 +19,7 @@ using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using DatingApp.API.Helpers;
+using AutoMapper;
 
 namespace DatingApp.API
 {
@@ -35,10 +36,26 @@ namespace DatingApp.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(option => option.UseSqlServer(Configuration.GetConnectionString("myconn")));
-            services.AddControllers();
+
+            //Adding NewtonsoftJson to serialize or deserialize data
+            services.AddControllers().AddNewtonsoftJson(opt =>
+            {
+                //This is added to avoid error - self referencing loop detected
+                opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+
             services.AddCors();
+
+            //AutoMapper: To map DTOs with Models to hide sensitive Information
+            services.AddAutoMapper(typeof(IDatingRepository).Assembly);
+
             // Adding service created for authorization
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IDatingRepository, DatingRepository>();
+
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
+
+            //For Authentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
