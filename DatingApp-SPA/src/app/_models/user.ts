@@ -15,4 +15,5 @@ export interface User {
     lookingFor?: string;
     interests?: string;
     photos?: Photo[];
+    password: string;
 }

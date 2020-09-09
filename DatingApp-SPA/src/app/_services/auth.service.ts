@@ -44,7 +44,7 @@ export class AuthService {
     return !this.jwtservice.isTokenExpired(token);
   }
 
-  register(model: any) {
-    return this._http.post(this.baseURL + "register", model);
+  register(user: User) {
+    return this._http.post(this.baseURL + "register", user);
   }
 }

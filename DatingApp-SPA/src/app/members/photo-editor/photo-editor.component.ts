@@ -58,6 +58,13 @@ export class PhotoEditorComponent implements OnInit {
           isMain: res.isMain
         };
         this.photos.push(photo);
+        if (res.isMain) {
+          this._authService.changeMemberPhoto(photo.url);
+
+          //Updating Local Storge from where we are getting our main photo, So it will update authservice.photoUrl and will update in components as well
+          this._authService.currentUser.photoUrl = photo.url;
+          localStorage.setItem("user", JSON.stringify(this._authService.currentUser));
+        }
       }
     }
   }
