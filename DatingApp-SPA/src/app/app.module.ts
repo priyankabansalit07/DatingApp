@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 import { AppRoutingModule } from "./app-routing.module";
 
@@ -40,7 +41,11 @@ export class CustomHammerConfig extends HammerGestureConfig {
 }
 
 @NgModule({
-  declarations: [AppComponent, NavComponent, HomeComponent, RegisterComponent, MessagesComponent, ListsComponent, MemberListComponent, MemberCardComponent, MemberDetailComponent, MemberEditComponent, PhotoEditorComponent],
+  declarations: [AppComponent, NavComponent, HomeComponent,
+    RegisterComponent, MessagesComponent, ListsComponent,
+    MemberListComponent, MemberCardComponent, MemberDetailComponent,
+    MemberEditComponent, PhotoEditorComponent,
+    TimeAgoPipe],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

@@ -49,6 +49,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  //custom Validator
   comparePasswordValidator(g: FormGroup) {
     const pswdctrlvalue = g.get('password').value;
     const confirmpswdvalue = g.get('confirmPassword').value;
